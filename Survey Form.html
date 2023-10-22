@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .form-container {
+            width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-checkbox {
+            margin-right: 5px;
+        }
+
+        .form-button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Costumer Survey Form</h2>
+        <form id="surveyForm">
+            <div class="form-group">
+                <label for="firstName" class="form-label">First Name:</label>
+                <input type="text" id="firstName" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label for="lastName" class="form-label">Last Name:</label>
+                <input type="text" id="lastName" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label for="dob" class="form-label">Date of Birth:</label>
+                <input type="date" id="dob" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label for="country" class="form-label">Country:</label>
+                <select id="country" class="form-select" required>
+                    <option value="">Select Country</option>
+                    <option value="USA">India</option>
+                    <option value="Canada">Canada</option>
+                    <option value="UK">UK</option>
+                    <option value="UK">Singapur</option>
+                    
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Gender:</label>
+                <input type="checkbox" id="male" class="form-checkbox" name="gender" value="Male" required>
+                <label for="male">Male</label>
+                <input type="checkbox" id="female" class="form-checkbox" name="gender" value="Female" required>
+                <label for="female">Female</label>
+            </div>
+            <div class="form-group">
+                <label for="profession" class="form-label">Profession:</label>
+                <input type="text" id="profession" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" id="email" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label for="mobile" class="form-label">Mobile Number:</label>
+                <input type="tel" id="mobile" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <button type="button" class="form-button" onclick="submitForm()">Submit</button>
+                <button type="button" class="form-button" onclick="resetForm()">Reset</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function submitForm() {
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const dob = document.getElementById('dob').value;
+            const country = document.getElementById('country').value;
+            const genderElements = document.getElementsByName('gender');
+            let gender = "";
+            for (const element of genderElements) {
+                if (element.checked) {
+                    gender = element.value;
+                    break;
+                }
+            }
+            const profession = document.getElementById('profession').value;
+            const email = document.getElementById('email').value;
+            const mobile = document.getElementById('mobile').value;
+
+            const formData = {
+                'First Name': firstName,
+                'Last Name': lastName,
+                'Date of Birth': dob,
+                'Country': country,
+                'Gender': gender,
+                'Profession': profession,
+                'Email': email,
+                'Mobile Number': mobile
+            };
+
+            let popupText = "<h2>Survey Form Data:</h2>";
+            for (const key in formData) {
+                popupText += `<p><strong>${key}:</strong> ${formData[key]}</p>`;
+            }
+
+            const popup = window.open('', 'Survey Form Data', 'width=400,height=400');
+            popup.document.write(popupText);
+
+            resetForm();
+        }
+
+        function resetForm() {
+            document.getElementById('surveyForm').reset();
+        }
+    </script>
+</body>
+</html>
